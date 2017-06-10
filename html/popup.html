@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ASINspector PRO</title>
+    <link rel="stylesheet" href="../css/css.css" />
+
+    <script src="../js/jquery-2.1.3.min.js"></script>
+
+    <script src="../js/amazon/sha2.js"></script>
+    <script src="../js/amazon/amazon.js"></script>
+    
+    <script src="../js/colorbox/jquery.colorbox-min.js"></script>
+    <link rel="stylesheet" href="../js/colorbox/example4/colorbox.css" />
+
+    <script src="../js/export/excellentexport.js"></script>
+
+    <script src="../js/qtip2/jquery.qtip.min.js"></script>
+    <link rel="stylesheet" href="../js/qtip2/jquery.qtip.min.css" />
+
+    <script type="text/javascript" src="../js/tablesorter/js/jquery.tablesorter.js"></script>
+    <link rel="stylesheet" href="../js/tablesorter/css/theme.ice.css" />
+
+    <script src="../js/helpers.js"></script>
+    <script src="../js/popup.js"></script>
+    
+    <script src="../js/script_licence_v2.js"></script>
+
+
+
+    <!-- -->
+    <script src="../js/xlsparser/jszip.min.js"></script>
+    <script src="../js/xlsparser/xlsx.js"></script>
+
+    <script src="../js/csvToArray.v2.1.js"></script>
+
+    
+    
+    
+</head>
+<body class="bigBody">
+    <img class="main-loader" src="../images/loader_big.svg" /> 
+    <div class="body-container">
+
+        <div class="error-message"></div>
+
+        <div class="fb-auth-message">
+            To use this extension you need to authorize with your FaceBook account. Click the link below to Authentificate with your FaceBook credentials. <br>
+          <p align=center style="font-weight:bold;"><a target="_blank" id="fb_link" href="https://www.facebook.com/dialog/oauth?client_id=584178168388263&response_type=token&scope=email&redirect_uri=http://asinspector.com/licence/fb_login_success_v2.php">Facebook Connect</a></p>
+    
+        </div>
+
+        <div class="licence-message">
+            <div id='fb_label'></div>
+            Enter Product Activation Code: <input type=text id="asi_licence_id" name="asi_licence_id" value="" > 
+            <input type=button id="asi_licence_button" value="Submit" />
+            <div id="asi_licence_status"></div>
+            <br>  Missed Your Activation Email? <a target="_blank" href="http://asinspector.com/licence/restore_pro.php">Click here</a></div>
+        </div>
+        
+        <div class="content">
+
+            <div class="header">
+                <a href="http://www.asinspector.com/" target="_blank" class="logo" tabindex="9999">
+                    <img src="../images/logo.png" />
+                </a>
+                <div class="header-division header-Results">
+                    <b>Nº of results</b>
+                    <span class="info">
+                        <img src="../images/loader_small.svg" />
+                    </span>
+                </div>
+                <div class="header-division header-SalesRank">
+                    <b>Sales Rank</b>
+                    <i>average</i>
+                    <span class="info">
+                        <img src="../images/loader_small.svg" />
+                    </span>
+                </div>
+                <div class="header-division header-LowestNewPrice header-BBPrice header-LowestUsedPrice header-LowestRefurbishedPrice">
+                    <b>Price (new)</b>
+                    <i>average</i>
+                    <span class="info">
+                        <img src="../images/loader_small.svg" />
+                    </span>
+                </div>
+                <div class="header-division header-NumOfReviews">
+                    <b>Nº of reviews</b>
+                    <i>average</i>
+                    <span class="info">
+                        <img src="../images/loader_small.svg" />
+                    </span>
+                </div>
+            </div>
+
+            <div class="table-scroll">
+                <table id="main-table">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+                <img src="../images/arrow-left.png" class="move-to-left" />
+                <img src="../images/arrow-right.png" class="move-to-right" />
+            </div>
+
+            <br class="clr" />
+
+
+            <div class="footer">
+                
+                <a id="facebook-group" href="https://www.facebook.com/groups/451173278393955" target="_blank" title="Facebook group" >
+                    <img height="16px" src="../images/fb-group.jpg" alt="Load" />
+                </a>
+                <a id="contact-us-asinspector" href="http://asinspector.com/contact-us/" target="_blank" title="Contact Us" >
+                    <img height="16px" src="../images/contact-us.png" />
+                </a>
+                <a id="members-training" href="http://asinspector.com/members/ " target="_blank" title="Members Training" >
+                    <img height="16px" src="../images/asin-pro-training.png " alt="Load" />
+                </a>
+
+                <a id="export-excel" download="data.xls" href="#" title="Export to XLS">
+                    <img src="../images/xls.png" />
+                </a>
+                <a id="export-csv" download="data.csv" href="#" title="Export to CSV">
+                    <img src="../images/csv.png" />
+                </a>
+
+                <a id="options-btn" class="options-btn" href="#options-screen" title="Options/Configuration">
+                    <img src="../images/options.png" />
+                </a>
+
+                <a id="filter-btn" class="filter-btn" href="#" title="Show/Hide Filters">
+                    <img src="../images/filter.png" />
+                </a>
+                
+                
+                
+                
+                
+                <a id="get-link" href="#" title="Open Amazon link of this page">
+                    <img src="../images/link.png" />
+                </a>
+                <a id="get-keywords" class="colorbox" href="#get-keywords-trends" title="KeyWords and Google Trends">
+                    <img src="../images/key.png" />
+                </a>
+                <a id="act-search-amazon" class="colorbox" href="#search-amazon" title="Make a new search on Amazon">
+                    <img src="../images/amazon.png" />
+                </a>
+
+                <a class="act-font-plus" href="#" title="Increase font size">
+                    <img src="../images/plusfont.png" />
+                </a>
+                <a class="act-font-minus" href="#" title="Decrease font size">
+                    <img src="../images/minusfont.png" />
+                </a>
+                <a class="act-lock-table" href="#" title="Attach/Detach table header on top">
+                    <img src="../images/lock.png" />
+                </a>
+                <a class="act-lock-title" href="#" title="Attach/Detach product name column on left">
+                    <img src="../images/lock-left.png" />
+                </a>
+                
+
+                <a class="import-asins colorbox" href="#import-asins" title="Import list of ASINs">
+                    <img src="../images/import.png" />
+                </a>
+
+                <a class="favorites-urls" href="#favorites-urls" title="Manage favorites">
+                    <img src="../images/favorites.png" />
+                </a>
+
+                <a class="brainstorm" href="#brainstorm" title="Brainstorm and discover">
+                    <img src="../images/brainstorm.png" />
+                </a>
+
+                <a class="barcode" href="#barcode" title="Recover scanned items">
+                    <img src="../images/barcode.png" />
+                </a>
+
+                <a href="#bulk-upc" id="open-bulk-upc" title="Amazon Done For You" class="open-done-for-you-new-window">
+                    <img src="../images/doneforyou.png" />
+                </a>
+
+                <a id="more-products" href="#" title="Add and load next products">
+                    <img src="../images/load.png" alt="Load" />
+                </a>
+
+
+                <span class="bottom-number-of-pages" title="Number of pages to load">
+                    <img src="../images/page-left.png" class="bottom-page-left" />
+                    <span class="bottom-number-of-pages-page-number">1</span> page(s)
+                    <img src="../images/page-right.png" class="bottom-page-right" />
+                </span>
+
+                <span class="uptodate"></span>
+
+
+
+
+                <img class="footer-loader" src="../images/loader_big.svg" /> 
+
+
+            </div>
+
+            <div id="options-screen">
+                <div class="w500px">
+                    <div class="option-fields">
+                    </div>
+                    <div class="extra-option-fields">
+                    </div>
+                </div>
+            </div>
+
+            <div id="compare-prices">
+                <div class="w500px">
+                    
+
+                    <div class="alert-info">
+                        <table border="0">
+                            <tr>
+                                <td class="tbl-col1"><a target="_blank" class="compare-prices-amazon-link" title="See on Amazon" href="#">Amazon</a></td><td class="tbl-col2"><b class="amazon-compare-prices"></b></td>
+                            </tr>
+                            <tr>
+                                <td class="tbl-col1"><a target="_blank" class="compare-prices-ebay-link" title="See on Ebay" href="#">Ebay</a></td><td class="tbl-col2"><b class="ebay-compare-prices"></b></td>
+                            </tr>
+
+                            <tr>
+                                <td class="tbl-col1"><a target="_blank" class="compare-prices-overstock-link" title="See on Overstock" href="#">Overstock</a></td><td class="tbl-col2"><b class="overstock-compare-prices"></b> </td>
+                            </tr>
+
+                            <tr>
+                                <td class="tbl-col1"><a target="_blank" class="compare-prices-wayfair-link" title="See on Wayfair" href="#">Wayfair</a></td><td class="tbl-col2"><b class="wayfair-compare-prices"></b> </td>
+                            </tr>
+
+                            <tr>
+                                <td class="tbl-col1"><a target="_blank" class="compare-prices-kohls-link" title="See on Kohls" href="#">Kohls</a></td><td class="tbl-col2"><b class="kohls-compare-prices"></b> </td>
+                            </tr>
+
+                            <tr>
+                                <td class="tbl-col1"><a target="_blank" class="compare-prices-toysrus-link" title='See on Toys "R" Us' href="#">Toys "R" Us</a></td><td class="tbl-col2"><b class="toysrus-compare-prices"></b> </td>
+                            </tr>
+
+                            <tr>
+                                <td class="tbl-col1"><a target="_blank" class="compare-prices-homedepot-link" title='See on Home Depot' href="#">Home Depot</a></td><td class="tbl-col2"><b class="homedepot-compare-prices"></b> </td>
+                            </tr>
+
+                            <tr class="hidden uk-store-compare-prices">
+                                <td class="tbl-col1"><a target="_blank" class="compare-prices-argos-link" title="See on Argos" href="#">Argos</a></td><td class="tbl-col2"><b class="argos-compare-prices"></b> <small>(U.K. Only)</small></td>
+                            </tr>
+                            <tr class="hidden uk-store-compare-prices">
+                                <td class="tbl-col1"><a target="_blank" class="compare-prices-asda-link" title="See on Asda" href="#">Asda</a></td><td class="tbl-col2"><b class="asda-compare-prices"></b> <small>(U.K. Only)</small></td>
+                            </tr>
+
+                            <tr class="hidden uk-store-compare-prices">
+                                <td class="tbl-col1"><a target="_blank" class="compare-prices-pcworld-link" title="See on PC World" href="#">PC World</a></td><td class="tbl-col2"><b class="pcworld-compare-prices"></b> <small>(U.K. Only)</small></td>
+                            </tr>
+
+                            <tr>
+                                <td class="tbl-col1"><a target="_blank" class="compare-prices-walmart-link" title="See on Walmart"href="#">Walmart</a></td><td class="tbl-col2"><b class="walmart-compare-prices"></b> <small>(U.S. Only)</small> </td>
+                            </tr>
+                            <tr>
+                                <td class="tbl-col1"><a target="_blank" class="compare-prices-target-link" title="See on Target" href="#">Target</a></td><td class="tbl-col2"><b class="target-compare-prices"></b> <small>(U.S. Only)</small> </td>
+                            </tr>
+
+
+                        </table>
+                    </div>
+                    <br /><br />
+                    <div class="alert-price-ebay-lower"></div>
+                    <br />
+                </div>
+            </div>
+
+            <div id="favorites-urls" class="hidden">
+                <div class="w500px">
+                    <table border="0" class="favorites-list" width="100%" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th width="90%">Search Keywords</th>
+                                <th class="w10p">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">
+                                    <center>
+                                        <input class="favorite-url-add-text" placeholder="Search KeyWords" type="text" />
+                                        <input type="button" name="btn-add-favorite" id="btn-add-favorite" value="Add to favorites" />
+                                    </center>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div id="brainstorm" class="hidden">
+                <div class="w900px">
+                    <table border="0" class="brainstorm-table" width="100%" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th width="60%">Random keywords</th>
+                                <th title="Number of products">Nº of products</th>
+                                <th title="Average SalesRank">Avg. rank</th>
+                                <th title="Average price">Avg. price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="brainstorm-helper">
+                                <td colspan="5" class="brainstorm-load"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+
+                    <center>
+                        <br /><br />
+                        <input type="button" name="btn-refresh-keywords-brainstorm" id="btn-refresh-keywords-brainstorm" value="Find new keywords" />
+                    </center>
+
+                </div>
+            </div>
+
+            <div id="barcode" class="hidden">
+                <div class="w500px">
+                    <h2>ASINspector Scanner - recover scanned items</h2>
+                    <p>To use ASINspector scanner, access <a href="http://asinspector.com/scanner/" target="_blank">http://asinspector.com/scanner</a> on your phone or tablet and take pictures of the barcodes you would like to search for on Amazon. This webapp will give you a <b>MasterKey</b>, which is a collection of the barcodes you scanned.</p>
+                    <table border="0" class="barcode-table" width="100%" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th width="85%">Scanner masterkey</th>
+                                <th class="w10p">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">
+                                    <center>
+                                        <input class="barcode-input" placeholder="MasterKey" type="text" />
+                                        <input type="button" name="btn-add-barcode" id="btn-add-barcode" value="Add to list" />
+                                    </center>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div id="barcode-interface" class="hidden">
+                <div class="w500px">
+                    <h2 class="barcode-masterkey"> </h2>
+
+                    <div class="barcode-loading">
+                        <center>
+                            <br />
+                            <img src="../images/loader_big.svg" width="50px" /> 
+                            <br />
+                        </center>
+                    </div>
+
+                    <div class="barcode-after-loaded">
+                        <table border="0" class="barcode-list-table" width="100%" cellpadding="0" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th class="barcode-td-column" width="15%">Barcode</th>
+                                    <th width="85%">Amazon product</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2">
+                                        <center>
+                                            <b>Please wait while we try to find the equivalent products in Amazon</b>
+                                            <input type="button" name="btn-open-barcodes" id="btn-open-barcodes" value="Open products on ASINspector PRO" />
+                                        </center>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <br /><br /><br />
+
+                </div>
+            </div>
+
+
+            <div id="search-amazon" class="hidden">
+                <div class="w500px">
+
+                    <h2>Make a new search on Amazon</h2>
+
+                    <p class="center info-search-amazon">No products were found, please make a new search on the box bellow<br /><br /></p>
+
+                    <input id="ipt-search-amazon" placeholder="search keywords" value="" style="width:96%; height:40px; margin-left:1%;" /><br /><br /><br />
+
+                    <center>
+                        <input type="button" name="btn-search-amazon" id="btn-search-amazon" value="Make new search" />
+
+                        <br /><br />
+
+                        <img class="loader-search-amazon" src="../images/loader_small.svg" height="40px" />
+                    </center>
+
+                    
+
+                    <br /><br />
+
+                </div>
+            </div>
+
+
+            <div id="tool-updates" class="hidden">
+                <div class="w900px">
+
+                    <h2>What is new?</h2>
+
+                    <iframe style="background:black;" src="https://player.vimeo.com/video/136127009" width="800" height="445" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+
+
+
+                    <br /><br />
+
+                </div>
+            </div>
+
+
+            <div id="get-product-keywords" class="hidden">
+                <div class="w900px">
+
+                    <div class="get-product-keywords-content">
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="frequently-bought-together" class="hidden">
+                <div class="w500px">
+                    <div class="frequently-bought-together-content">
+                        <br /><br /><br /><br />
+
+                        <center>
+
+                            <img style="width:40px;" src="../images/loader_big.svg" />
+                            <br /><br />
+                            <b>Looking for Frequently Bought Together...</b>
+                        </center>
+
+
+                        <br /><br />
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="get-product-variations" class="hidden">
+                <div class="w500px">
+                    <div class="get-product-variations">
+                        <br /><br /><br /><br />
+
+                        <center>
+                            <img style="width:40px;" src="../images/loader_big.svg" />
+                            <br /><br />
+                            <b>Looking for Child/Variations products...</b>
+                        </center>
+
+                        <br /><br />
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="get-product-stock" class="hidden">
+                <div class="w500px">
+                    <div class="get-product-stock-content">
+                        <br /><br /><br /><br />
+
+                        <center class="inventory-before">
+                            <img style="width:40px;" src="../images/loader_big.svg" />
+                            <br /><br />
+                            <b>Looking for inventory on hand...</b>
+                        </center>
+
+                        <center class="inventory-after">
+                            <b>
+                                <span></span>
+                            </b>
+                            <br /><br />
+                        </center>
+
+
+                        <br /><br />
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="net-payout">
+                <div class="w500px">
+                    <form id="form-net-payout">
+                        <input type="hidden" id="asin-net-payout" />
+
+                        <p>Provide your cost and see the profit you will have when selling this product "fulfilled by Amazon". This tool will get the Amazon Selling fees and fulfilled by Amazon fees and inform your NET Payout and Return on Investment.</p><br />
+
+
+                        <div class="option-fields">
+                            <label>
+                                <span><b>Amazon Price</b>: </span>
+                                <input type="number" step="any" id="amazon-price-net-payout" required />
+                            </label>
+
+                            <label>
+                                <span><b>Your Cost</b>: </span>
+                                <input type="number" step="any" id="your-price-net-payout" required />
+                            </label>
+                        </div>
+
+                        <br />
+                        <div class="center">
+                            <input type="submit" value="Get NET Payout" id="calculate-net-payout" />
+                            &nbsp;
+                            <input type="button" value="Break-even cost" id="discover-breakeven-cost" />
+                            
+
+                            <div class="hidden" id="loader-net-payout">
+                                <img src="../images/loader_big.svg" height="30px" />
+                            </div>
+
+                            <div class="hidden alert-info" id="result-net-payout">
+                                <table border="0">
+                                    <tr>
+                                        <td class="tbl-col1">Fulfillment by Amazon Fees:</td><td class="tbl-col2"><b class="fba-fees-payout"></b><small class="float-right">(<a href="#" class="fba-fees-payout-a">Show/Hide details</a>)</small> <small><div class="fba-fees-description hidden"></div></small></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tbl-col1">NET Payout:</td><td class="tbl-col2"><b class="net-payout"></b></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tbl-col1">Return On Investment (ROI):</td><td class="tbl-col2"><b class="roi"></b></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tbl-col1">Number of sellers on Amazon:</td><td class="tbl-col2"><b class="sellers-num"></b></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+
+                            
+                        </div>
+                        <br />
+                    </form>
+
+                </div>
+            </div>
+
+
+
+            <div id="get-keywords-trends" class="hidden">
+                <div class="w900px">
+                    <h2 class="main-keywords"></h2>
+                    <iframe frameborder="0px" class="graph-trends" src="" width="100%" height="340px">
+                        <center><img height="50px" src="../images/loader_big.svg" /></center>
+                    </iframe>
+                    <h4>Related keywords:</h4>
+                    <div class="related-trends">
+                        <center><img height="50px" src="../images/loader_big.svg" /></center>
+                    </div><br /><br /><br />
+                </div>
+            </div>
+
+
+
+            <div id="import-asins" class="hidden">
+                <div class="w500px">
+
+                    <h2>Import list of ASINs</h2>
+
+                    <div class="loadfromfile">
+                        <p><b>Select a file in your computer:</b></p>
+                        <input type="file" id="filefromcsv"><br /><br />
+                    </div>
+
+                    <p><b><span class="loadfromfile">Or </span>Paste your list of ASINs in the box bellow (one ASIN by line)</b></p>
+
+                    
+                    
+                    <center>
+                        <textarea id="ipt-list-asin"></textarea>
+                        <br /><br /><br />
+
+                        <input type="button" name="btn-search-asin" id="btn-search-asin" value="Analyze ASINs" />
+
+                        <img class="loader-search-asin hidden" src="../images/loader_small.svg" height="40px" />
+
+                        <br /><br />
+                    </center>
+
+                </div>
+            </div>
+
+
+
+            <a href="#inform-ecomtracker-credentials" id="inform-ecomtracker-credentials2" title="EcomTracker sign in" class="colorbox hidden">login</a>
+            <div id="inform-ecomtracker-credentials" class="hidden">
+                <div class="w500px">
+
+                    <h2>Inform your EcomTracker credentials</h2>
+                    <br />
+
+
+                    <input placeholder="Username" type="text" class="ecomfield ecom_username" />
+                    <input placeholder="Password" type="password" class="ecomfield ecom_password" />
+
+                    
+                    <center class="ecom-loader-after-click-on-button">
+                        <br />
+
+                        <input type="button" id="ecom_make_login" value="Sign in" />
+
+                        <br /><br />
+                    </center>
+                    <center class="ecom-loader-before-click-on-button hidden">
+                        <img src="../images/loader_big.svg" width="50px" /> 
+                    </center>
+
+                </div>
+            </div>
+
+            <div id="send-to-ecomtracker" class="hidden">
+                <div class="w500px send-to-ecomtracker">
+
+                    <br />
+
+                    <center class="beforesend">
+                        <br />
+                        <img src="../images/loader_big.svg" width="50px" /> 
+                        <br />
+                    </center>
+
+                    <center class="aftersend">
+                        <br /><br /><br />
+                        <b>Product sent sucessfully!</b>
+                        <br /><br /><br />
+                    </center>
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+            <div id="menu-options-column-number">
+                <a href="#" class="cn-select-all">Select all</a>
+                <a href="#" class="cn-deselect-all">Deselect all</a>
+                <a href="#" class="cn-invert-selection">Invert selection</a>
+
+                <a href="#" class="cn-delete-all-selected">Delete selected</a>
+                <a href="#" class="cn-delete-all-not-selected">Delete <b>not</b> selected</a>
+                <a href="#" class="cn-export-all-selected-csv" id="cn-export-all-selected-csv" download="data.csv">Export selected to CSV</a>
+                <a href="#" class="cn-export-all-selected-xls" id="cn-export-all-selected-xls" download="data.xls">Export selected to XLS</a>
+                <a href="#" class="cn-copy-asin-all-selected">Copy ASINs of selected</a>
+            </div>
+
+            <div class="cls-menu-options-column-number">
+                <a href="#" class="cn-all-available-sellers">All available sellers</a>
+                <a href="#" class="cn-all-prime-sellers">Only amazon prime sellers</a>
+                <a href="#" class="cn-all-condition-new">Only condition: new</a>
+            </div>
+
+            <div class="stores-menu-options-column-number">
+                <a href="#" rel="alibaba" class="cn-store-alibaba">Alibaba</a>
+                <a href="#" rel="aliexpress" class="cn-store-aliexpress">AliExpress</a>
+                <a href="#" rel="ebay" class="cn-store-ebay">eBay</a>
+                <a href="#" rel="toysrus" class="cn-store-toysrus">Toys "R" Us</a>
+                <a href="#" rel="walmart" class="menu-com cn-store-walmart">Walmart</a>
+                <a href="#" rel="target" class="menu-com cn-store-target">Target</a>
+                <a href="#" rel="kohls" class="menu-com cn-store-kohls">Kohl's</a>
+                <a href="#" rel="overstock" class="menu-com cn-store-overstock">Overstock</a>
+                <a href="#" rel="wayfair" class="menu-com menu-uk cn-store-wayfair">Wayfair</a>
+                <a href="#" rel="argos" class="menu-uk cn-store-argos">Argos</a>
+                <a href="#" rel="asda" class="menu-uk cn-store-asda">Asda</a>
+                <a href="#" rel="homedepot" class="cn-store-homedepot">Home Depot</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

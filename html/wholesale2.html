@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Amazon done for you | ASINspector</title>
+    <link rel="stylesheet" href="../css/css.css" />
+
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/helpers.js"></script>
+    <script src="../js/wholesale2.js"></script>    
+
+    <script src="../js/xlsparser/jszip.min.js"></script>
+    <script src="../js/xlsparser/xlsx.js"></script>
+
+    <script src="../js/csvToArray.v2.1.js"></script>
+
+    <script src="../js/colorbox/jquery.colorbox-min.js"></script>
+    <link rel="stylesheet" href="../js/colorbox/example4/colorbox.css" />
+
+
+
+</head>
+<body class="wait wholesalebody">
+    <br /><br /><br />
+    <input type="file" id="bulk-upc-file" style="display:none"/>
+
+    <div class="wholesale-information-table">
+        <label>
+            <span class="input-wholesale">
+                <input placeholder="Enter Your E-mail here" type="email" class="email-customer" />
+                <span>(required)</span>
+            </span>
+        </label>
+
+        <label>
+            <span class="input-wholesale">
+                <input placeholder="Enter Extra Cost Here" type="number" step="any" min="0" class="extra-cost" />
+                <span>(optional)</span>
+            </span>
+        </label>
+        <label>
+            <span class="input-wholesale">
+                <input placeholder="Enter Cost of Lot Here" type="number" step="any" min="0" class="lot-cost" />
+                <span>(optional)</span>
+            </span>
+        </label>
+
+        <div class="container-button">
+            <input type="button" id="click-bulk-upc-file" value="Select your XLS/XLSX wholesale file" />
+        </div>
+
+        <br /><p>Once all products on your file are processed, we will send the report to your email.</p>
+
+    </div>
+
+    <div style="display:none;" class="testFBATablefee"></div>
+    <div class="main-loading"></div>
+    <div class="helper">
+        <h2>Sample wholesale files:</h2>
+        <ul>
+            <li>
+                <b>ASIN</b> as key: <a href="../resources/wholesale_sample_asin.xlsx" target="_blank">download</a>
+            </li>
+            <li><b>UPC</b> as key: <a href="../resources/wholesale_sample.xlsx" target="_blank">download</a></li>
+        </ul>
+        <br />
+    </div>
+    <div class="result" style="display:none;">
+        <h2>Nº of <span class="idtype">UPC</span>s on file: <b class="xls-products-on-file"></b></h2>
+        <h2>Nº of <span class="idtype">UPC</span>s found on Amazon: <b class="xls-products-on-amazon"></b></h2><br /><br />
+        <table border="0">
+            <tr>
+                <td class="tbl-col1">Total estimated revenue for products on Amazon</td>
+                <td class="tbl-col2 xls-estimated-revenue"> <img src="../images/loader_big.svg" /> </td>
+            </tr>
+            <tr>
+                <td class="tbl-col1">Total Amazon FBA fees</td>
+                <td class="tbl-col2 xls-amazon-fba-fees"> <img src="../images/loader_big.svg" /> </td>
+            </tr>
+            <tr>
+                <td class="tbl-col1">Total profit for products on Amazon</td>
+                <td class="tbl-col2 xls-profit-products-amazon-revenue"> <img src="../images/loader_big.svg" /> </td>
+            </tr>
+            <tr>
+                <td class="tbl-col1">Total estimated profit for products not found on Amazon</td>
+                <td class="tbl-col2 xls-total-profit-out-amazon"> <img src="../images/loader_big.svg" /> </td>
+            </tr>
+            
+            <tr style="display:none">
+                <td class="tbl-col1">Extra costs or fees</td>
+                <td class="tbl-col2 xls-total-extra-costs"> <img src="../images/loader_big.svg" /> </td>
+            </tr>
+            <tr style="display:none">
+                <td class="tbl-col1">Lot file cost</td>
+                <td class="tbl-col2 xls-total-lost-cost"> <img src="../images/loader_big.svg" /> </td>
+            </tr>
+
+            <tr>
+                <td class="tbl-col1"><b>Total estimated profit</b></td>
+                <td class="tbl-col2 xls-total-profit"> <img src="../images/loader_big.svg" /> </td>
+            </tr>
+        </table>
+
+        <br /><br />
+        <input value="Download results" type="button" class="download-result-file">
+        <input value=" Show results " type="button" class="show-result-file">
+        <br /><br />
+        <div class="show-result-file-table">
+        </div>
+    </div>
+</body>
+</html>

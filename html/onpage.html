@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/helpers.js"></script>
+    <script src="../js/amazon/amazon.js"></script>
+    <script src="../js/amazon/sha2.js"></script>
+    <script src="../js/onpage.js"></script>
+    <script src="../js/colorbox/jquery.colorbox-min.js"></script>
+
+    <link rel="stylesheet" href="../css/onpage.css" />
+</head>
+<body class="onpage-asinspector">
+    <div id="result-net-payout">
+        <h2 class="logo">
+            <img src="/images/logo.png" height="25px">
+        </h2>
+        <div class="asin-line" style="margin-top:-10px; margin-bottom:10px;">
+            &nbsp;
+        </div>
+        <div class="hide-if-no-salesrank">
+            <b>Estimated Sales (month): </b>
+            <span class="estimated-sales-per-month local-EstSales">
+                <img valign="middle" src="../images/loader_big.svg" height="15px" />
+            </span>
+        </div>
+        <div class="hide-if-no-salesrank">
+            <b title="Estimated revenue (month)">Est. Rev. (month): </b>
+            <span class="estimated-revenue-per-month local-EstRevenue">
+                <img valign="middle" src="../images/loader_big.svg" height="15px" />
+            </span>
+        </div>
+
+        <div class="hide-if-no-salesrank" style="margin-top:30px;margin-bottom:30px;">
+          <div>
+            Sales Price :&nbsp;&nbsp; <input type="text" id="ntp_price" style="width: 100px;">
+          </div>
+
+          <br>
+
+          <div>
+            Buy Cost :&nbsp;&nbsp; <input type="text" id="ntp_breakEven" style="width: 100px;">
+          </div>
+
+          <br>
+
+          <div>
+            Net Payout : &nbsp;&nbsp; <span id="net_payout_id"></span>
+          </div>
+        </div>
+
+        <div class="asin-line hide-if-no-salesrank" style="margin-top:12px; margin-bottom:-7px;">
+            &nbsp;
+        </div>
+        <h4 class="line-separator hide-if-no-fba">FBA fees</h4>
+
+        <div class="asin-line hide-if-no-fba" style="margin-top:-5px; margin-bottom:12px;">
+            &nbsp;
+        </div>
+        <div class="fba-fees-description hide-if-no-fba">
+            <img src="../images/loader_big.svg" />
+        </div>
+    </div>
+
+    <div style="display:none" class="local-SalesRank"></div>
+    <div style="display:none" class="local-Rating"></div>
+    <div style="display:none" class="price-price local-BBPrice local-LowestNewPrice local-LowestUsedPrice local-LowestRefurbishedPrice"></div>
+</body>
+</html>

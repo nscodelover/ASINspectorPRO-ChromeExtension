@@ -1,0 +1,54 @@
+{
+    "manifest_version": 2,
+    "name": "ASINspector PRO",
+    "short_name": "ASINspector PRO",
+    "version": "1.8.7",
+
+    "description": "With ASINspector PRO you will be able to get more than 50 different fields of information about products in Amazon",
+    "icons": { "16"  : "images/icon16.png",
+               "48"  : "images/icon48.png",
+               "128" : "images/icon128.png"},
+
+    "browser_action": {
+        "default_icon": "images/icon48.png",
+        "default_popup": "html/button.html"
+    },
+
+    "background": {"scripts": ["js/background.js"]},
+
+    "homepage_url": "http://www.asinspector.com/",
+
+    "content_security_policy": "script-src 'self' https://connect.facebook.net; object-src 'self'",
+
+
+
+
+
+    "content_scripts": [
+        {
+            "run_at": "document_start",
+            "matches": ["*://www.amazon.com/*", "*://www.amazon.co.uk/*", "*://www.amazon.ca/*", "*://www.amazon.it/*", "*://www.amazon.de/*", "*://www.amazon.es/*", "*://www.amazon.fr/*"],
+            "css": ["css/onpage.css"],
+            "js": ["js/jquery-2.1.3.min.js", "js/onpage.js", "js/helpers.js"]
+         }
+    ],
+    "web_accessible_resources": [
+        "html/onpage.html"
+    ],
+
+
+
+
+
+
+    "permissions": [
+        "http://*/*",
+        "https://*/*",
+        "activeTab",
+        "webRequest",
+        "<all_urls>",
+        "tabs",
+        "http://*.facebook.com/*",
+        "unlimitedStorage"
+    ]
+}
